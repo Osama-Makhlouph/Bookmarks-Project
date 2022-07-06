@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-from telnetlib import AUTHENTICATION
-
+# from telnetlib import AUTHENTICATION
+from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -142,3 +142,7 @@ LOGOUT_URL = 'logout'
 SOCIAL_AUTH_FACEBOOK_KEY = '580366320110196'  # Facebook App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '9b6860ead6c789b8dd69c9a210de0c9d'  # Facebook App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
